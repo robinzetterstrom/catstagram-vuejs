@@ -1,22 +1,41 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <p>If you see a list below you have seen Axios in actions!</p>
+    <ul>
+      <li v-for="item in items">{{ item.company.name }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Fakestagram!'
+      msg: 'Welcome to Fakestagram!',
+      items: []
     }
+  },
+
+  methods: {
+    axiosDemo () {
+      axios.get('https://jsonplaceholder.typicode.com/users/')
+      .then(response => { this.items = response.data })
+      .catch(error => { console.debug(error) })
+    }
+  },
+
+  created () {
+    this.axiosDemo()
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<!-- Add "scoped" attribute to limit SASS to this component only -->
+<style lang="scss" scoped>
 h1, h2 {
   font-weight: normal;
 }
@@ -27,8 +46,9 @@ ul {
 }
 
 li {
-  display: inline-block;
+  display: block;
   margin: 0 10px;
+  padding: 1em 0;
 }
 
 a {
