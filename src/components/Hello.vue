@@ -5,6 +5,9 @@
     <ul>
       <li v-for="item in items">{{ item.company.name }}</li>
     </ul>
+    <div class="test">
+      <p>testing</p>
+    </div>
   </div>
 </template>
 
@@ -35,7 +38,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit SASS to this component only -->
-<style lang="scss" scoped>
+<style lang="scss">
+$color: red;
+
 h1, h2 {
   font-weight: normal;
 }
@@ -54,4 +59,7 @@ li {
 a {
   color: #42b983;
 }
+  .test {
+    p { color: $color; }
+  }
 </style>
