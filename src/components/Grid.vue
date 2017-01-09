@@ -1,55 +1,79 @@
 <template>
   <div>
     <div class="grid">
-      <div class="image-container" v-for="image in images" v-bind:data-comments="image.comments">
+      <div class="image-container" v-for="image in images" v-bind:data-comments="image.comments" v-on:click="image.showModal = !image.showModal">
         <img class="image" v-bind:src="image.url">
+        <modal v-bind:id="image.id" v-bind:link="image.url" v-if="image.showModal"></modal>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import Modal from './Modal'
+
   export default{
     name: 'grid',
+    components: {
+      Modal
+    },
     data () {
       return {
         msg: 'I am Grid!',
         images: [
           {
+            id: 1,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           },
           {
+            id: 2,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           },
           {
+            id: 3,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           },
           {
+            id: 4,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           },
           {
+            id: 5,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           },
           {
+            id: 6,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           },
           {
+            id: 7,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           },
           {
+            id: 8,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           },
           {
+            id: 9,
             url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            comments: 1,
+            showModal: false
           }
         ]
       }
