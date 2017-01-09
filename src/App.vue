@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <hello></hello>
+    <grid></grid>
   </div>
 </template>
 
 <script>
 import Hello from './components/Hello'
+import Grid from './components/Grid'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    Hello,
+    Grid
   }
 }
 </script>
