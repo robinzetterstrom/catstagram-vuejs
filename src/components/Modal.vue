@@ -1,7 +1,7 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
-      <div class="modal-wrapper">
+      <div class="modal-wrapper" @click.self.stop="$emit('childToggle')">
         <div class="modal-container">
 
           <div class="modal-image-container">
@@ -10,7 +10,7 @@
 
           <div class="comments-section">
             <div class="modal-close">
-                <button class="modal-default-button" @click="$emit('close')">
+                <button class="modal-default-button" @click.stop="$emit('childToggle')">
                   Close
                 </button>
             </div>
@@ -59,7 +59,7 @@
 
 .modal-mask {
   position: fixed;
-  z-index: 9998;
+  z-index: 3;
   top: 0;
   left: 0;
   width: 100%;
@@ -75,6 +75,7 @@
 }
 
 .modal-container {
+  z-index: 4;
   width: 800px;
   height: 400px;
   margin: 0px auto;
