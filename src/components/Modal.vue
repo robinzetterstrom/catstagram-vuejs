@@ -16,7 +16,7 @@
             </div>
 
             <div class="modal-header">
-              <h3> Comments </h3>
+              <h3>Comments</h3>
             </div>
 
             <div class="modal-body">
@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="post-comment">
-              <form id="form">
+              <form id="form" v-on:submit.prevent>
                 <input type="username" placeholder="Username">
                 <input type="comment" placeholder="Write your comment here...">
                 <input type="submit" value="Post comment">

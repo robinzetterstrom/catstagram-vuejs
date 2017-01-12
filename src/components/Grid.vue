@@ -19,14 +19,12 @@
     },
     methods: {
       handleOpen: function (obj) {
-        if (!obj.showModal) {
+        if (obj.showModal === false) {
           obj.showModal = true
-          console.log('open')
         }
       },
       handleClose: function (obj) {
         obj.showModal = false
-        console.log('close')
       }
     },
     data () {
