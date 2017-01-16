@@ -20,14 +20,18 @@
             </div>
 
             <div class="modal-body">
-              <span> Comments for picture no {{ id }} </span>
+              <ul>
+                <li v-for="comment in comments">
+                  <b>{{ comment.username }} - </b> {{ comment.text }}
+                </li>
+              </ul>
             </div>
           </div>
           <div class="post-comment">
-              <form id="form" v-on:submit.prevent>
-                <input type="username" placeholder="Username">
-                <input type="comment" placeholder="Write your comment here...">
-                <input type="submit" value="Post comment">
+              <form id="form">
+                <input type="username" v-model="form.username" placeholder="Username">
+                <input type="comment" v-model="form.comment" placeholder="Write your comment here...">
+                <input type="submit" @click.prevent="addComment(form)" value="Post comment">
               </form>
           </div>
         </div>
@@ -42,7 +46,25 @@
     props: ['id', 'link'],
     data () {
       return {
-        msg: 'I am Modal!'
+        form: {
+          username: '',
+          comment: '',
+          id: this.id
+        }
+      }
+    },
+    methods: {
+      addComment (payload) {
+        // We pass in our form input and dispatch to store action 'add' and pass our payload to the store
+        this.$store.dispatch('add', payload)
+          // ... after submit comment, reset form fields
+        this.form.username = ''
+        this.form.comment = ''
+      }
+    },
+    computed: {
+      comments () {
+        return this.$store.getters.comments.filter(comments => { return comments.image_id === this.form.id })
       }
     }
   }
@@ -50,7 +72,6 @@
 
 
 <style lang="scss">
-
 .modal-header, .modal-body, .modal-close, .post-comment {
   text-align: left;
   box-sizing: border-box;
@@ -64,7 +85,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, .5);
+  background-color: rgba(255, 255, 255, .8);
   display: table;
   transition: opacity .3s ease;
 }
@@ -106,9 +127,19 @@
 }
 
 .modal-body {
-  height: auto;
+  height: 80%;
+  display: block;
   width: 50%;
   float: right;
+  overflow: scroll;
+  ul { margin: 0; padding: 0; }
+  li {
+    list-style: none;
+    padding: .5em;
+    color: #777;
+    background: #efefef;
+    margin-top: .5em;
+  }
 }
 
 .modal-close {

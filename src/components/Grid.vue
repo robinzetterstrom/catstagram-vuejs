@@ -33,55 +33,55 @@
         images: [
           {
             id: 1,
-            url: 'http://lorempixel.com/600/600/cats/1',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           },
           {
             id: 2,
-            url: 'http://lorempixel.com/600/600/cats/2',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           },
           {
             id: 3,
-            url: 'http://lorempixel.com/600/600/cats/3',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           },
           {
             id: 4,
-            url: 'http://lorempixel.com/600/600/cats/4',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           },
           {
             id: 5,
-            url: 'http://lorempixel.com/600/600/cats/5',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           },
           {
             id: 6,
-            url: 'http://lorempixel.com/600/600/cats/6',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           },
           {
             id: 7,
-            url: 'http://lorempixel.com/600/600/cats/7',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           },
           {
             id: 8,
-            url: 'http://lorempixel.com/600/600/cats/8',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           },
           {
             id: 9,
-            url: 'http://lorempixel.com/600/600/cats/9',
+            url: '/static/images/cat-placeholder.jpg',
             comments: 1,
             showModal: false
           }
