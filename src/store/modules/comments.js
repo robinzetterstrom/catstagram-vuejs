@@ -11,14 +11,23 @@ export const Comments = {
           'username': payload.username,
           'text': payload.comment,
           'image_id': payload.id,
+          // Use milliseconds to create unique ID
+          'comment_id': new Date().getTime(),
           'date': moment().locale('sv').format('L')
         })
       }
+    },
+    remove (state, payload) {
+      const commentIndex = state.comments.map(comment => comment.comment_id).indexOf(payload.comment_id)
+      state.comments.splice(commentIndex, 1)
     }
   },
   actions: {
     add ({ commit }, payload) {
       commit('add', payload)
+    },
+    remove ({ commit }, payload) {
+      commit('remove', payload)
     }
   },
   getters: {

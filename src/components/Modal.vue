@@ -5,7 +5,7 @@
         <div class="modal-container">
 
           <div class="modal-image-container">
-            <img class="modal-image" v-bind:src="link"> 
+            <img class="modal-image" v-bind:src="link">
           </div>
 
           <div class="comments-section">
@@ -23,6 +23,8 @@
               <ul>
                 <li v-for="comment in comments">
                   <b>{{ comment.username }} - </b> {{ comment.text }}
+                  <button>Edit</button>
+                  <button @click="removeComment(comment)">Delete</button>
                 </li>
               </ul>
             </div>
@@ -60,6 +62,9 @@
           // ... after submit comment, reset form fields
         this.form.username = ''
         this.form.comment = ''
+      },
+      removeComment (payload) {
+        this.$store.dispatch('remove', payload)
       }
     },
     computed: {
@@ -118,7 +123,7 @@
 
 .comments-section {
   height: 80%;
-  border-bottom: 1px solid black;  
+  border-bottom: 1px solid black;
 }
 
 .post-comment {
