@@ -1,55 +1,89 @@
 <template>
   <div>
     <div class="grid">
-      <div class="image-container" v-for="image in images" v-bind:data-comments="image.comments">
+      <div class="image-container" v-for="image in images" v-bind:data-comments="image.comments" v-on:click="handleOpen(image)">
         <img class="image" v-bind:src="image.url">
+        <modal v-bind:id="image.id" v-bind:link="image.url" v-on:childToggle="handleClose(image)" v-if="image.showModal"></modal>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import Modal from './Modal'
+
   export default{
     name: 'grid',
+    components: {
+      Modal
+    },
+    methods: {
+      handleOpen: function (obj) {
+        if (obj.showModal === false) {
+          obj.showModal = true
+        }
+      },
+      handleClose: function (obj) {
+        obj.showModal = false
+      }
+    },
     data () {
       return {
         msg: 'I am Grid!',
         images: [
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 1,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           },
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 2,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           },
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 3,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           },
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 4,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           },
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 5,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           },
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 6,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           },
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 7,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           },
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 8,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           },
           {
-            url: 'http://lorempixel.com/600/600/cats/',
-            comments: 1
+            id: 9,
+            url: '/static/images/cat-placeholder.jpg',
+            comments: 1,
+            showModal: false
           }
         ]
       }
