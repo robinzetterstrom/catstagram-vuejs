@@ -64,7 +64,16 @@
     },
     computed: {
       comments () {
-        return this.$store.getters.comments.filter(comments => { return comments.image_id === this.form.id })
+        return this.$store.getters.comments
+        .filter(comments => { return comments.image_id === this.form.id })
+        .sort((a, b) => {
+          if (a.date < b.date) {
+            return -1
+          }
+          if (a.date > b.date) {
+            return 1
+          }
+        })
       }
     }
   }
