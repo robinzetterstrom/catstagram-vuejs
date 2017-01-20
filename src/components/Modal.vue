@@ -21,11 +21,7 @@
 
             <div class="modal-body">
               <ul>
-                <li v-for="comment in comments">
-                  <b>{{ comment.username }} - </b> {{ comment.text }}
-                  <button>Edit</button>
-                  <button @click="removeComment(comment)">Delete</button>
-                </li>
+                <comment v-for="comment in comments" v-bind:comment="comment"></comment>
               </ul>
             </div>
           </div>
@@ -43,8 +39,13 @@
 </template>
 
 <script>
+  import Comment from './Comment'
+
   export default{
     name: 'modal',
+    components: {
+      Comment
+    },
     props: ['id', 'link'],
     data () {
       return {
@@ -62,9 +63,6 @@
           // ... after submit comment, reset form fields
         this.form.username = ''
         this.form.comment = ''
-      },
-      removeComment (payload) {
-        this.$store.dispatch('remove', payload)
       }
     },
     computed: {

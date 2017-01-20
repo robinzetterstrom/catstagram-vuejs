@@ -18,8 +18,14 @@ export const Comments = {
       }
     },
     remove (state, payload) {
+      // Find the comment in the store and remove it.
       const commentIndex = state.comments.map(comment => comment.comment_id).indexOf(payload.comment_id)
       state.comments.splice(commentIndex, 1)
+    },
+    update (state, payload) {
+      // Find the comment in the store and update its text property.
+      const commentIndex = state.comments.map(comment => comment.comment_id).indexOf(payload.comment_id)
+      state.comments[commentIndex].text = payload.text
     }
   },
   actions: {
@@ -28,6 +34,9 @@ export const Comments = {
     },
     remove ({ commit }, payload) {
       commit('remove', payload)
+    },
+    update ({ commit }, payload) {
+      commit('update', payload)
     }
   },
   getters: {
