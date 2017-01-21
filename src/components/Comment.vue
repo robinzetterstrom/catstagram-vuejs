@@ -1,11 +1,13 @@
 <template>
-  <li>
-    <b>{{ comment.username }} - </b>
+  <li class="comment">
+    <b>{{ comment.username }}: </b>
     <input v-if="isEditable" v-model="text" @keyup.enter="updateComment(comment)">
     <span v-else>{{ comment.text }}</span>
-    <button @click="updateComment(comment)" v-if="isEditable">Save</button>
-    <button @click="editComment()" v-else>Edit</button>
-    <button @click="removeComment(comment)">Delete</button>
+    <div class="buttons">
+      <button class="btn-save" @click="updateComment(comment)" v-if="isEditable">Save</button>
+      <button class="btn-edit" @click="editComment()" v-else>Edit</button>
+      <button class="btn-delete" @click="removeComment(comment)" v-if="!isEditable">Delete</button>
+    </div>
   </li>
 </template>
 
@@ -45,3 +47,31 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .comment {
+    overflow-wrap: break-word;
+    position: relative;
+  }
+
+  .buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    align-items: center;
+    height: 100%;
+    width: 0;
+    background-color: #efefef;
+  }
+
+  .btn-delete, .btn-edit, .btn-save {
+    margin-right: 5px;
+  }
+  .comment:hover {
+    .buttons {
+      display: flex;
+      width: auto;
+    }
+  }
+</style>
