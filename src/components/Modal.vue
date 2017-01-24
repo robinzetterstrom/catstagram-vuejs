@@ -125,6 +125,14 @@
   font-family: Helvetica, Arial, sans-serif;
 }
 
+.modal-comments {
+  input {
+    border-radius: 25px;
+    border: 2px solid #efefef;
+    padding: 5px;
+  }
+}
+
 .comments-section {
   height: 80%;
 }
@@ -156,6 +164,31 @@
     &:first-child {
       margin-top: .5em; 
     }
+  }
+
+  .buttons {
+    box-sizing: border-box;
+    padding-left: 5px;
+    border: 2px solid #f7754e;
+  }
+
+  button {
+    background-color: #e4e4e4;
+    border: 2px solid #efefef;
+    border-radius: 25px;
+    padding: 5px;
+
+    &:hover, &:active {
+      border-color: #f7754e;
+    }
+
+    &:active {
+      background-color: #d55c3c;
+    }
+  }
+
+  input {
+    width: 55%;
   }
 }
 
@@ -204,9 +237,6 @@ div.input {
     input {
       width: 90%;
       margin-left: 4%;
-      border-radius: 25px;
-      border: 2px solid #efefef;
-      padding: 5px;
       &:first-child {
        margin-bottom: 2%;
       }
