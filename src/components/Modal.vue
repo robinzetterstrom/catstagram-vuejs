@@ -5,7 +5,7 @@
         <div class="modal-container">
 
           <div class="modal-image-container">
-            <img class="modal-image" v-bind:src="link"> 
+            <img class="modal-image" v-bind:src="link">
           </div>
 
           <div class="modal-comments">
@@ -22,9 +22,7 @@
 
             <div class="modal-body">
               <ul>
-                <li v-for="comment in comments">
-                  <b>{{ comment.username }} - </b> {{ comment.text }}
-                </li>
+                <comment v-for="comment in comments" v-bind:comment="comment"></comment>
               </ul>
             </div>
           </div>
@@ -47,8 +45,13 @@
 </template>
 
 <script>
+  import Comment from './Comment'
+
   export default{
     name: 'modal',
+    components: {
+      Comment
+    },
     props: ['id', 'link'],
     data () {
       return {
@@ -122,6 +125,10 @@
   font-family: Helvetica, Arial, sans-serif;
 }
 
+.comments-section {
+  height: 80%;
+}
+
 .modal-header {
   padding-top: 0;
   padding-bottom: 0;
@@ -176,11 +183,8 @@
     }
 }
 
-.comments-section {
-  height: 80%;
-}
-
 .post-comment {
+  box-sizing: border-box;
   height: 20%;
   border-top: 2px solid #f7754e;
   background-color: #f7f7f7;
