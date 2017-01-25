@@ -8,10 +8,11 @@
             <img class="modal-image" v-bind:src="link">
           </div>
 
+          <div class="modal-comments">
           <div class="comments-section">
             <div class="modal-close">
                 <button class="modal-default-button" @click.stop="$emit('childToggle')">
-                  Close
+                  x
                 </button>
             </div>
 
@@ -27,10 +28,15 @@
           </div>
           <div class="post-comment">
               <form id="form">
+              <div class="input">
                 <input type="username" v-model="form.username" placeholder="Username">
                 <input type="comment" v-model="form.comment" placeholder="Write your comment here...">
+              </div>
+              <div class="submit"> 
                 <input type="submit" @click.prevent="addComment(form)" value="Post comment">
+              </div>
               </form>
+          </div>
           </div>
         </div>
       </div>
@@ -84,7 +90,7 @@
 
 
 <style lang="scss">
-.modal-header, .modal-body, .modal-close, .post-comment {
+.modal-header, .modal-body, .modal-close {
   text-align: left;
   box-sizing: border-box;
   padding: 10px 20px;
@@ -119,54 +125,153 @@
   font-family: Helvetica, Arial, sans-serif;
 }
 
-.comments-section {
-  height: 80%;
-  border-bottom: 1px solid black;
+.modal-comments {
+  input {
+    border-radius: 25px;
+    border: 2px solid #efefef;
+    padding: 5px;
+  }
 }
 
-.post-comment {
-  padding: 10px;
+.comments-section {
+  height: 80%;
 }
 
 .modal-header {
-  float: right;
-  width: 50%;
+  padding-top: 0;
+  padding-bottom: 0;
   text-align: center;
+  height: 10%;
   h3 {
     margin: 0;
-    color: #42b983;
+    color: #f7754e;
   }
 }
 
 .modal-body {
   height: 80%;
   display: block;
-  width: 50%;
-  float: right;
-  overflow: scroll;
+  overflow-y: auto;
+  padding-top: 0;
   ul { margin: 0; padding: 0; }
   li {
     list-style: none;
-    padding: .5em;
+    padding: .7em;
     color: #777;
     background: #efefef;
     margin-top: .5em;
+    word-break: break-all;
+    &:first-child {
+      margin-top: .5em; 
+    }
+  }
+
+  .buttons {
+    box-sizing: border-box;
+    padding-left: 5px;
+    border: 2px solid #f7754e;
+  }
+
+  button {
+    background-color: #e4e4e4;
+    border: 2px solid #efefef;
+    border-radius: 25px;
+    padding: 5px;
+
+    &:hover, &:active {
+      border-color: #f7754e;
+    }
+
+    &:active {
+      background-color: #d55c3c;
+    }
+  }
+
+  input {
+    width: 55%;
   }
 }
 
 .modal-close {
-  float: right;
-  height: 20px;
-  width: auto;
+  padding: 7px 7px 0 0;
+  height: 10%;
 
   .modal-default-button {
+    background-color: #efefef;
+    width: 25px;
+    height: 25px;
     float: right;
-  }
+    border-radius: 100%;
+    font-weight: 900;
+    font-size: 12px;
+    border: 2px solid #e4e4e4;
+
+    &:hover {
+      border-color: #f7754e;
+      }
+    
+    &:active {
+        background-color: #d55c3c;
+      }
+    }
 }
 
 .post-comment {
-  width: 50%;
-  float: right;
+  box-sizing: border-box;
+  height: 20%;
+  border-top: 2px solid #f7754e;
+  background-color: #f7f7f7;
+
+form {
+  height: 100%;
+}
+
+div.input {
+    width: 70%;
+    height: 100%;
+    float: left;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+
+    input {
+      width: 90%;
+      margin-left: 4%;
+      &:first-child {
+       margin-bottom: 2%;
+      }
+    }
+  }
+
+  div.submit {
+    width: 30%;
+    height: 100%;
+    float: right;
+    display: flex; 
+    justify-content: flex-end;
+
+    input {
+      align-self: center;
+      height: 40px;
+      margin-right: 10%;
+      background-color: #e4e4e4;
+      border: 2px solid #efefef;
+      border-radius: 25px;
+
+      &:hover, &:active {
+        border-color: #f7754e;
+      }
+
+      &:active {
+        background-color: #d55c3c;
+      }
+    }
+  }
+}
+
+
+.post-comment {
+  width: 100%;
 }
 
   .modal-enter {
@@ -188,8 +293,25 @@
     width: 50%;
   }
 
+  .modal-comments {
+    float: right;
+    width: 50%;
+    height: 100%;
+  }
   .modal-image {
     width: 400px;
     height: 400px;
   }
+
+  @media (max-width: 800px) {
+
+  .modal-container {
+    width: 400px;
+    height: 800px;
+  }
+   .modal-comments, .modal-image-container  {
+      width: 100%;
+      height: 400px;
+    }
+}
 </style>

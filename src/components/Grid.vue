@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid">
-      <div class="image-container" v-for="image in images" v-bind:data-comments="image.comments" v-on:click="handleOpen(image)">
+      <div class="image-container" v-for="image in images" v-bind:data-comments="countComments(image)" v-on:click="handleOpen(image)">
         <img class="image" v-bind:src="image.url">
         <modal v-bind:id="image.id" v-bind:link="image.url" v-on:childToggle="handleClose(image)" v-if="image.showModal"></modal>
       </div>
@@ -25,6 +25,9 @@
       },
       handleClose: function (obj) {
         obj.showModal = false
+      },
+      countComments: function (obj) {
+        return this.$store.getters.comments.filter(comments => { return comments.image_id === obj.id }).length
       }
     },
     data () {
@@ -33,56 +36,47 @@
         images: [
           {
             id: 1,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat1.jpg',
             showModal: false
           },
           {
             id: 2,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat2.jpg',
             showModal: false
           },
           {
             id: 3,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat3.jpg',
             showModal: false
           },
           {
             id: 4,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat4.jpg',
             showModal: false
           },
           {
             id: 5,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat5.jpg',
             showModal: false
           },
           {
             id: 6,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat6.jpg',
             showModal: false
           },
           {
             id: 7,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat7.jpg',
             showModal: false
           },
           {
             id: 8,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat8.jpg',
             showModal: false
           },
           {
             id: 9,
-            url: '/static/images/cat-placeholder.jpg',
-            comments: 1,
+            url: '/static/images/cat9.jpg',
             showModal: false
           }
         ]

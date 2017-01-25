@@ -8,7 +8,7 @@ describe('Grid.vue', () => {
     var spy1;
 
     spy1 = sinon.spy(Grid.methods, 'handleOpen');
-    
+  
     const vm = new Vue({
       el: document.createElement('div'),
       store,
@@ -105,4 +105,20 @@ describe('Grid.vue', () => {
     spy5.restore();
   })
 
+  it('countComments should return the number of comments for the picture', () => {
+    var fakeData;
+    var noOfComments;
+    var noOfActualComments;
+
+    const vm = new Vue({
+      el: document.createElement('div'),
+      store,
+    });
+
+    fakeData = { id: 3 }; //image with known mock comments, might change
+
+    noOfComments = Grid.methods.countComments.call(vm, fakeData);
+    noOfActualComments = vm.$store.getters.comments.filter(comments => { return comments.image_id === fakeData.id }).length;
+    expect(noOfComments).to.equal(noOfActualComments); 
+  })
 })
