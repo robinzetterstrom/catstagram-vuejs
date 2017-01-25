@@ -55,6 +55,7 @@ module.exports = function (config) {
     preprocessors: {
       './index.js': ['webpack', 'sourcemap']
     },
+    logLevel: config.LOG_DISABLE,
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true

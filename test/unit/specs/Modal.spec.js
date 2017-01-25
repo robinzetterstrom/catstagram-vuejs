@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Modal from 'src/components/Modal'
+import store from '../../../src/store/index'
 
 describe('Modal.vue', () => {
   it('should render correct contents', () => {
     const vm = new Vue({
       el: document.createElement('div'),
+      store,
       render: (h) => h(Modal)
     })
     expect(vm.$el.querySelector('.modal-header h3').textContent)
