@@ -102,4 +102,23 @@ describe('Grid.vue', () => {
     spy5.restore();
   })
 
+  xit('countComments should return the number of comments for the picture', () => {
+    var spy6;
+    var fakeData;
+    var noOfComments;
+    var noOfActualComments;
+
+    fakeData = { id: 3 }; //image with known mock comments, might change
+
+    spy6 = sinon.spy(Grid.methods, 'countComments');
+    noOfComments = Grid.methods.countComments(fakeData);
+    noOfActualComments = this.$store.getters.comments.filter(comments => { return comments.image_id === fakeData.id }).length
+
+    assert(spy6.called, 'countComments was not called'); 
+    expect(noOfComments).to.equal(noOfActualComments); 
+
+    spy6.restore();
+  })
+
+  //it('', () => {})
 })
