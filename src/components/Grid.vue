@@ -26,7 +26,7 @@
       handleClose: function (obj) {
         obj.showModal = false
       },
-      countComments (obj) {
+      countComments: function (obj) {
         return this.$store.getters.comments.filter(comments => { return comments.image_id === obj.id }).length
       }
     },

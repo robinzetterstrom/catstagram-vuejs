@@ -1,17 +1,20 @@
 import Vue from 'vue'
 import Grid from 'src/components/Grid'
+import store from '../../../src/store/index'
+// import Comments from '../../../src/store/modules/comments'
 
 describe('Grid.vue', () => {
   it('should call the handleOpen function when image is clicked', (done) => {
     var image; 
     var spy1;
     spy1 = sinon.spy(Grid.methods, 'handleOpen');
-    
+  
     const vm = new Vue({
-    el: document.createElement('div'),
-    render: (h) => h(Grid)
+      el: document.createElement('div'),
+      store,
+      render: (h) => h(Grid)
     });
-    
+
     image = vm.$el.querySelector('.image-container');
     image.click();
 
@@ -29,6 +32,7 @@ describe('Grid.vue', () => {
     spy2 = sinon.spy(Grid.methods, 'handleClose');
     const vm = new Vue({
       el: document.createElement('div'),
+      store,
       render: (h) => h(Grid)
     });
 
@@ -54,6 +58,7 @@ describe('Grid.vue', () => {
     spy3 = sinon.spy(Grid.methods, 'handleClose');
     const vm = new Vue({
       el: document.createElement('div'),
+      store,
       render: (h) => h(Grid)
     });
 
@@ -82,8 +87,7 @@ describe('Grid.vue', () => {
     Grid.methods.handleOpen(fakeData);
 
     assert(spy4.called, 'handleOpen was not called'); 
-    expect(fakeData.showModal).to.equal(true); 
-    
+    expect(fakeData.showModal).to.equal(true);
     spy4.restore();
   })
 
@@ -98,27 +102,23 @@ describe('Grid.vue', () => {
 
     assert(spy5.called, 'handleOpen was not called'); 
     expect(fakeData.showModal).to.equal(true); 
-    
     spy5.restore();
   })
 
-  xit('countComments should return the number of comments for the picture', () => {
-    var spy6;
+  it('countComments should return the number of comments for the picture', () => {
     var fakeData;
     var noOfComments;
     var noOfActualComments;
 
+    const vm = new Vue({
+      el: document.createElement('div'),
+      store,
+    });
+
     fakeData = { id: 3 }; //image with known mock comments, might change
 
-    spy6 = sinon.spy(Grid.methods, 'countComments');
-    noOfComments = Grid.methods.countComments(fakeData);
-    noOfActualComments = this.$store.getters.comments.filter(comments => { return comments.image_id === fakeData.id }).length
-
-    assert(spy6.called, 'countComments was not called'); 
+    noOfComments = Grid.methods.countComments.call(vm, fakeData);
+    noOfActualComments = vm.$store.getters.comments.filter(comments => { return comments.image_id === fakeData.id }).length;
     expect(noOfComments).to.equal(noOfActualComments); 
-
-    spy6.restore();
   })
-
-  //it('', () => {})
 })
