@@ -8,10 +8,11 @@ Vue.use(Vuex)
  * Vuex modules
  */
 import { Comments } from './modules/comments'
+import { Images } from './modules/images'
 
 export default new Vuex.Store({
   strict: debug,
   modules: {
-    Comments
+    Comments, Images
   }
 })

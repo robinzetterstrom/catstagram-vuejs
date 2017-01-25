@@ -3,17 +3,20 @@
     <header>
       <img src="/static/images/catstagram.png" alt="Catstagram">
     </header>
+    <latestcomment></latestcomment>
     <grid></grid>
   </div>
 </template>
 
 <script>
 import Grid from './components/Grid'
+import LatestComment from './components/LatestComment'
 
 export default {
   name: 'app',
   components: {
-    Grid
+    grid: Grid,
+    latestcomment: LatestComment
   }
 }
 </script>
