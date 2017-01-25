@@ -3,6 +3,23 @@ import Comment from 'src/components/Comment'
 import store from '../../../src/store/index'
 
 describe('Comment.vue', () => {
+  // Helper function to create component instances with props
+  function getComp (Component, propsData) {
+    const Ctor = Vue.extend(Component);
+    const vm = new Ctor({ propsData }).$mount();
+    return vm
+  }
+
+  const commentComponent = getComp(Comment, {comment: { text: 'Test text sent as prop' }});
+  
+  it('should set correct default data', () => {
+    expect(commentComponent.isEditable).to.equal(false);
+    expect(commentComponent.text).to.equal('Test text sent as prop');
+    expect(commentComponent.cachedText).to.equal('');
+  });
+});
+
+describe('Comment.vue', () => {
   const vm = new Vue({
     el: document.createElement('div'),
     data: {
