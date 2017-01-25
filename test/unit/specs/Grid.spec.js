@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Grid from 'src/components/Grid'
 import store from '../../../src/store/index'
-// import Comments from '../../../src/store/modules/comments'
 
 describe('Grid.vue', () => {
   it('should call the handleOpen function when image is clicked', (done) => {
     var image; 
     var spy1;
+
     spy1 = sinon.spy(Grid.methods, 'handleOpen');
   
     const vm = new Vue({
