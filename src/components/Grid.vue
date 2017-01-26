@@ -19,10 +19,10 @@
     },
     methods: {
       handleOpen: function (payload) {
-        this.$store.dispatch('toggleImage', {...payload, functionality: 'open'})
+        this.$store.dispatch('toggleImage', {...payload, shouldOpen: true})
       },
       handleClose: function (payload) {
-        this.$store.dispatch('toggleImage', {...payload, functionality: 'close'})
+        this.$store.dispatch('toggleImage', {...payload, shouldOpen: false})
       },
       countComments: function (obj) {
         return this.$store.getters.comments.filter(comments => { return comments.image_id === obj.id }).length

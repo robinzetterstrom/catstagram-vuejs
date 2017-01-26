@@ -49,16 +49,16 @@ export const Images = {
     ]
   },
   mutations: {
-    toggleImage (state, payload, functionality) {
+    toggleImage (state, payload, shouldOpen) {
       // Find the image in the store and update the showModal value.
       const imageIndex = state.images.map(image => image.id).indexOf(payload.id)
-      if (payload.functionality === 'open') {
+      if (payload.shouldOpen) {
         if (state.images[imageIndex].showModal === false) {
           state.images[imageIndex].showModal = true;
         }
-      } else if (payload.functionality === 'close') {
+      } else {
         state.images[imageIndex].showModal = false;
-      }
+      } 
     }
   },
   actions: {

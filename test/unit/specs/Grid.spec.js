@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Grid from 'src/components/Grid'
 import store from '../../../src/store/index'
 
+//Timeout functions needed due to lag when clicking on elements & updating fake data passed to functions
+//Rendering in each 'it' instead of in an beforeEach function due to mysterious errors with spies if beforeEach is used
+
 describe('Grid.vue', () => {
   it('should call the handleOpen function when image is clicked', (done) => {
     var image; 
@@ -36,6 +39,7 @@ describe('Grid.vue', () => {
       render: (h) => h(Grid)
     });
 
+    // selecting first picture in grid and opening it in a modal
     image = vm.$el.querySelector('.image-container');
     image.click();
 
@@ -47,8 +51,8 @@ describe('Grid.vue', () => {
         assert(spy2.called, 'handleClose was not called');
         spy2.restore();
         done();
-      }, 500);
-    }, 500);
+      }, 100);
+    }, 100);
   })
 
   it('should call the handleClose function when area outside the modal is clicked', () => {
@@ -62,6 +66,7 @@ describe('Grid.vue', () => {
       render: (h) => h(Grid)
     });
 
+    // selecting first picture in grid and opening it in a modal
     image = vm.$el.querySelector('.image-container');
     image.click();
 
@@ -73,36 +78,44 @@ describe('Grid.vue', () => {
         assert(spy3.called, 'handleClose was not called');
         spy3.restore();
         done();
-      }, 500);
-    }, 500);
+      }, 100);
+    }, 100);
   })
 
   it('handleOpen should update the showModal value to true if it is false', () => {
-    var spy4;
     var fakeData;
 
-    fakeData = { showModal: false };
+    fakeData = { showModal: false, id: 2 };
 
-    spy4 = sinon.spy(Grid.methods, 'handleOpen');
-    Grid.methods.handleOpen(fakeData);
+    const vm = new Vue({
+      el: document.createElement('div'),
+      store,
+      render: (h) => h(Grid)
+    });
+    
+    Grid.methods.handleOpen.call(vm, fakeData);
 
-    assert(spy4.called, 'handleOpen was not called'); 
-    expect(fakeData.showModal).to.equal(true);
-    spy4.restore();
+    setTimeout(function(){
+      expect(fakeData.showModal).to.equal(true);
+    }, 100);
   })
 
   it('handleOpen should NOT change the showModal value if it is true', () => {
-    var spy5;
     var fakeData;
 
-    fakeData = { showModal: true };
+    fakeData = { showModal: true, id:2 };
 
-    spy5 = sinon.spy(Grid.methods, 'handleOpen');
-    Grid.methods.handleOpen(fakeData);
+    const vm = new Vue({
+      el: document.createElement('div'),
+      store,
+      render: (h) => h(Grid)
+    });
 
-    assert(spy5.called, 'handleOpen was not called'); 
-    expect(fakeData.showModal).to.equal(true); 
-    spy5.restore();
+    Grid.methods.handleOpen.call(vm, fakeData);
+
+    setTimeout(function(){
+      expect(fakeData.showModal).to.equal(true); 
+    }, 100);
   })
 
   it('countComments should return the number of comments for the picture', () => {
