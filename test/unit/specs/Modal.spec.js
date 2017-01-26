@@ -18,8 +18,4 @@ describe('Modal.vue', () => {
   xit('should display the comments belonging to that image', () => {})
 
   xit('should should allow users to post comments', () => {})
-
-  xit('should should allow users to edit comments', () => {})
-
-  xit('should should allow users to delete comments', () => {})
 })
