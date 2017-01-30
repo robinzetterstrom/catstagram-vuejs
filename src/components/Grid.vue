@@ -18,13 +18,11 @@
       Modal
     },
     methods: {
-      handleOpen: function (obj) {
-        if (obj.showModal === false) {
-          obj.showModal = true
-        }
+      handleOpen: function (payload) {
+        this.$store.dispatch('toggleImage', {...payload, shouldOpen: true})
       },
-      handleClose: function (obj) {
-        obj.showModal = false
+      handleClose: function (payload) {
+        this.$store.dispatch('toggleImage', {...payload, shouldOpen: false})
       },
       countComments: function (obj) {
         return this.$store.getters.comments.filter(comments => { return comments.image_id === obj.id }).length
@@ -32,54 +30,7 @@
     },
     data () {
       return {
-        msg: 'I am Grid!',
-        images: [
-          {
-            id: 1,
-            url: '/static/images/cat1.jpg',
-            showModal: false
-          },
-          {
-            id: 2,
-            url: '/static/images/cat2.jpg',
-            showModal: false
-          },
-          {
-            id: 3,
-            url: '/static/images/cat3.jpg',
-            showModal: false
-          },
-          {
-            id: 4,
-            url: '/static/images/cat4.jpg',
-            showModal: false
-          },
-          {
-            id: 5,
-            url: '/static/images/cat5.jpg',
-            showModal: false
-          },
-          {
-            id: 6,
-            url: '/static/images/cat6.jpg',
-            showModal: false
-          },
-          {
-            id: 7,
-            url: '/static/images/cat7.jpg',
-            showModal: false
-          },
-          {
-            id: 8,
-            url: '/static/images/cat8.jpg',
-            showModal: false
-          },
-          {
-            id: 9,
-            url: '/static/images/cat9.jpg',
-            showModal: false
-          }
-        ]
+        images: this.$store.getters.images
       }
     }
   }
