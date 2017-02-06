@@ -1,7 +1,7 @@
 <template>
   <div class="latestComment">
     <h3>Latest comment</h3>
-    <div class="clickableComment" v-bind:latest-comment="latestComment" v-on:click="handleOpen(latestcomment)"> 
+    <div class="clickableComment" v-bind:latest-comment="latestComment" v-on:click="handleOpen(latestcomment)">
         <img class="thumbnail" v-bind:src="latestcomment.imageURL"></img>
         <p>
           <b>{{ latestcomment.username }}:</b>
@@ -26,8 +26,7 @@
     },
     methods: {
       handleOpen: function (latestcomment) {
-        let imageObj = latestcomment;
-        this.$store.dispatch('toggleImage', {...imageObj, functionality: 'open'})
+        this.$store.dispatch('toggleImage', {...latestcomment, shouldOpen: true})
       },
       countComments: function (obj) {
         return this.$store.getters.comments.filter(comments => comments.image_id === obj.id).length
@@ -66,7 +65,7 @@
     }
 
   @media (max-width: 800px) {
-    width: 100%;  
+    width: 100%;
     }
   }
 </style>
