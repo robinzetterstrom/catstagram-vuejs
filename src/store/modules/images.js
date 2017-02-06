@@ -58,7 +58,7 @@ export const Images = {
         }
       } else {
         state.images[imageIndex].showModal = false;
-      } 
+      }
     }
   },
   actions: {
