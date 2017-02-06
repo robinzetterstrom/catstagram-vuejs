@@ -21,6 +21,14 @@ describe('Modal.vue', () => {
     vm.form.comment = ''
   })
 
+  let expectedComment = {
+    username: 'Frank',
+    text: 'My valid text for testing',
+    image_id: 3,
+    comment_id: 4,
+    date: '2016-02-24'
+  }
+
   it('should render correct contents', () => {
     expect(vm.$el.querySelectorAll('input').length).to.equal(3);
     expect(vm.$el.querySelector('.modal-header h3').textContent).to.equal('Comments')
@@ -28,7 +36,7 @@ describe('Modal.vue', () => {
 
   it('sort comments by date with oldest comment at index 0', () => {
     let comments = Modal.computed.comments.call(vm)
-    expect(comments[0].date).to.be.equal('2016-02-24')
+    expect(comments[0]).to.be.deep.equal(expectedComment);
   })
 
   it('should allow users to post comments', () => {

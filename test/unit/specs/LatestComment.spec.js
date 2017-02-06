@@ -15,7 +15,15 @@ describe('LatestComment.vue', () => {
     },
     store,
     render: (h) => h(LatestComment)
-  }).$mount();
+  });
+
+  // We know that this dude will always be the oldest, if we dont decide to change the initialState mock
+  let expectedComment = {
+    username: 'Arvid',
+    text: 'I want to cuddle with it!',
+    imageURL: '/static/images/cat2.jpg',
+    id: 2
+  }
 
   it('should render correct contents', () => {
     expect(vm.$el.querySelector('.latestComment h3').textContent)
@@ -24,31 +32,33 @@ describe('LatestComment.vue', () => {
 
   it('should fetch latest comment from store and be set to component data properties', () => {
     LatestComment.computed.latestComment.call(vm);
-    // We know that this dude will always be the oldest, if we dont decide to change the initialState mock
-    let expectedComment = {
-      username: 'Frank',
-      text: 'Ohhh...I love when cats purr',
-      imageURL: '/static/images/cat3.jpg',
-      id: 3
-    }
     expect(vm.latestcomment).to.be.eql(expectedComment)
   })
 
   it('should open when latest comment is clicked', (done) => {
-    /* TODO: Fix the core problem with the toggle dispatch. 
-     * At the moment shouldOpen becomes undefined in images mutation
-     * 
-     * if (payload.shouldOpen) {.....
-     * 
-     * probably problem is that shouldOpen that doesnt exist in payload?
-    */
     let state = vm.$store.getters.images;
     let image = vm.$el.querySelector('.clickableComment');
+    // My custom assert to check state of showModal
+    let modalAssert = (arr, bool) => {
+      arr
+      .filter(image => {
+        if (image.showModal && image.id === expectedComment.id) {
+          expect(image.id).to.be.equal(expectedComment.id);
+          expect(image.showModal).to.be.equal(bool);
+        }
+      })
+    }
+
+    // Modal should not be open before we click the image
+    modalAssert(state, false);
+
+    // We now click the modal to show it....
     image.click()
 
     Vue.nextTick(() => {
-      console.log(state)
-      done()
+      // Now the showModal should be set to true
+      modalAssert(state, true);
+      done();
     })
   })
 
@@ -56,6 +66,10 @@ describe('LatestComment.vue', () => {
     LatestComment.computed.latestComment.call(vm);
     let counter = LatestComment.methods.countComments.call(vm, vm.latestcomment)
 
+    // Can only be one comment, so lets make sure of that, shall we?
+    expect(counter).to.be.equal(1).and.not.equal(2)
+    // And we also expect the value to be a number
     expect(counter).not.to.be.NaN
+    expect(Number.isInteger(counter)).to.be.equal(true)
   })
 })
