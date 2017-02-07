@@ -85,7 +85,7 @@ describe('Grid.vue', () => {
   it('handleOpen should update the showModal value to true if it is false', () => {
     var fakeData;
 
-    fakeData = { showModal: false, id: 2 };
+    fakeData = { showModal: false, id: 1 };
 
     const vm = new Vue({
       el: document.createElement('div'),
@@ -103,7 +103,7 @@ describe('Grid.vue', () => {
   it('handleOpen should NOT change the showModal value if it is true', () => {
     var fakeData;
 
-    fakeData = { showModal: true, id:2 };
+    fakeData = { showModal: true, id: 1 };
 
     const vm = new Vue({
       el: document.createElement('div'),

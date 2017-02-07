@@ -1,6 +1,6 @@
 [
-  { "username": "Ylva", "text": "So cute!", "image_id": 3, "comment_id": 1, "date": "2017-01-01" },
+  { "username": "Frank", "text": "Ohhh...I love when cats purr", "image_id": 3, "comment_id": 4, "date": "2016-02-24" },
   { "username": "Robin", "text": "When I see this kitty, I get hungry!", "image_id": 3, "comment_id": 2, "date": "2016-11-28" },
-  { "username": "Arvid", "text": "I want to cuddle with it!", "image_id": 2, "comment_id": 3, "date": "2017-01-10" },
-  { "username": "Frank", "text": "Ohhh...I love when cats purr", "image_id": 9, "comment_id": 4, "date": "2016-02-24" }
+  { "username": "Ylva", "text": "So cute!", "image_id": 3, "comment_id": 1, "date": "2017-01-01" },
+  { "username": "Arvid", "text": "I want to cuddle with it!", "image_id": 2, "comment_id": 3, "date": "2017-01-10" }
 ]
