@@ -58,17 +58,22 @@
         form: {
           username: '',
           comment: '',
-          id: this.id
+          id: this.id // Target a spcific mocked image with most comments
         }
       }
     },
     methods: {
       addComment (payload) {
-        // We pass in our form input and dispatch to store action 'add' and pass our payload to the store
-        this.$store.dispatch('add', payload)
+        // Validate input before dispatch to the store
+        if (payload.username.length > 2 && payload.comment.length > 3 && payload.comment.length <= 300) {
+          // We pass in our form input and dispatch to store action 'add' and pass our payload to the store
+          this.$store.dispatch('add', payload)
           // ... after submit comment, reset form fields
-        this.form.username = ''
-        this.form.comment = ''
+          this.form.username = ''
+          this.form.comment = ''
+        } else {
+          return new Error("Couldn't add comment to store. There could be a problem with name or comment length")
+        }
       }
     },
     computed: {
@@ -76,12 +81,9 @@
         return this.$store.getters.comments
         .filter(comments => { return comments.image_id === this.form.id })
         .sort((a, b) => {
-          if (a.date < b.date) {
-            return -1
-          }
-          if (a.date > b.date) {
-            return 1
-          }
+          let date1 = new Date(a.date);
+          let date2 = new Date(b.date);
+          return date1 - date2
         })
       }
     }
